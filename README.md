@@ -1,2 +1,2 @@
-# alkfejl-mma
-Alkalmazások fejlesztése project - 2019.
+# Marvel Mozi Alkalmazás
+## Alkalmazások fejlesztése project - 2019.
