@@ -45,7 +45,7 @@ public class Projection implements Serializable {
     private Date time;
     
     @Column
-    private boolean isfull = false;
+    private boolean is_full = false;
     
     @OneToMany(mappedBy = "projection")
     private List<Ticket> tickets;

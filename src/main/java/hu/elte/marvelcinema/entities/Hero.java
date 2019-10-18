@@ -49,7 +49,7 @@ public class Hero implements Serializable {
     
     @Column
     @NotNull
-    private String portrayedby;
+    private String portrayed_by;
     
     @JoinTable
     @ManyToMany

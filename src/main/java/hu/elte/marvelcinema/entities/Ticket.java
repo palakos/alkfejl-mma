@@ -51,10 +51,7 @@ public class Ticket implements Serializable {
     @Column()
     @NotNull
     private Integer seat;
-    
-    @Column()
-    private boolean istaken = false;
-    
+     
     @Column()
     private Integer price = 1400;
 }

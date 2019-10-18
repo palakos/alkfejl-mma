@@ -37,11 +37,11 @@ public class Movie implements Serializable {
     
     @Column
     @NotNull
-    private String titlehu;
+    private String title_hu;
     
     @Column
     @NotNull
-    private String titleen;
+    private String title_en;
     
     @Column
     @NotNull
