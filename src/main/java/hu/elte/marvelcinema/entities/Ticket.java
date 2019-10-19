@@ -5,15 +5,15 @@
  */
 package hu.elte.marvelcinema.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,24 +34,15 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnore
-    private User user;
-    
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnore
-    private Projection projection;
-       
     @Column()
     @NotNull
-    private Integer row;
+    private Integer row_num;
     
     @Column()
     @NotNull
-    private Integer seat;
+    private Integer seat_num;
      
-    @Column()
-    private Integer price = 1400;
+    @Column(columnDefinition = "integer default 1400")
+    private Integer price;
+    
 }

@@ -44,20 +44,7 @@ public class Projection implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date time;
     
-    @Column
-    private boolean is_full = false;
+    @Column(columnDefinition = "boolean default false")
+    private boolean is_full;
     
-    @OneToMany(mappedBy = "projection")
-    private List<Ticket> tickets;
-    
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnore
-    private Room room;
-    
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnore
-    private Movie movie;
-
 }

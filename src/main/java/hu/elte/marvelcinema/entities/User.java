@@ -45,15 +45,4 @@ public class User {
     @NotNull
     private String pass;
        
-    @Column()
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private Role role;
-    
-    @OneToMany(mappedBy = "user")
-    private List<Ticket> tickets;
-    
-    public enum Role {
-        ROLE_GUEST, ROLE_USER, ROLE_ADMIN
-    }
 }

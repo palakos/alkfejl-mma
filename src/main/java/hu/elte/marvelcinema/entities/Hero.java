@@ -50,9 +50,5 @@ public class Hero implements Serializable {
     @Column
     @NotNull
     private String portrayed_by;
-    
-    @JoinTable
-    @ManyToMany
-    private List<Movie> movies;
-        
+            
 }

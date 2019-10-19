@@ -46,6 +46,4 @@ public class Room implements Serializable {
     @NotNull
     private Integer seats;
        
-    @OneToMany(mappedBy = "room")
-    private List<Projection> projections;
 }
