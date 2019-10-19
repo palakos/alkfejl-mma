@@ -81,9 +81,8 @@ Oszlopnév | Típus | Leírás
 id | int | elsődleges kulcs
 user_id | int | a jegyvásárlást lebonyolító felhasználó ID-je
 projection_id | int | a vetítés ID-je, amire szól a jegy
-row | int | sor száma, ahova szól a jegy
-seat | int | szék száma, ahova szól a jegy
-is_taken | boolean | foglalt-e az adott hely
+row_num | int | sor száma, ahova szól a jegy
+seat_num | int | szék száma, ahova szól a jegy
 price | int | jegyár forintban
 
 ### PROJECTION
@@ -115,7 +114,7 @@ title_en | varchar | film angol címe
 year | int | megjelenés éve
 description | varchar | film leírása
 phase | int | a film melyik fázishoz tartozik az MCU-ban
-order | int | film sorszáma az MCU idővonala szerint
+order_num | int | film sorszáma az MCU idővonala szerint
 rate | float | film értékelése  (1-10)
 length | int | film hossza percben
 
