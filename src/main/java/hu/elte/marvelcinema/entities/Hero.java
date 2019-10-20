@@ -8,6 +8,7 @@ package hu.elte.marvelcinema.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,5 +51,9 @@ public class Hero implements Serializable {
     @Column
     @NotNull
     private String portrayed_by;
+        
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "heroes")
+    @JsonIgnore
+    private List<Movie> movies;
             
 }

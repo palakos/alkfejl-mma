@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,6 +46,19 @@ public class Projection implements Serializable {
     private Date time;
     
     @Column(columnDefinition = "boolean default false")
-    private boolean is_full;
+    private boolean isfull;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projection")
+    private List<Ticket> tickets;
+    
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnore
+    private Room room;
+    
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnore
+    private Movie movie;
     
 }

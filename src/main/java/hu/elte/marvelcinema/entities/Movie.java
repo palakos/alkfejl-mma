@@ -6,11 +6,16 @@
 package hu.elte.marvelcinema.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -62,5 +67,12 @@ public class Movie implements Serializable {
     @Column
     @NotNull
     private Integer length;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
+    private List<Projection> projections;
+       
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
+    private List<Hero> heroes;
             
 }

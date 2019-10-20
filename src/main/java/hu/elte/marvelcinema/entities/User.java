@@ -6,6 +6,7 @@
 package hu.elte.marvelcinema.entities;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,5 +45,21 @@ public class User {
     @Column()
     @NotNull
     private String pass;
+    
+    @Column()
+    @NotNull
+    private boolean enabled;
+    
+    @Column()
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    
+    public enum Role {
+        ROLE_GUEST, ROLE_USER, ROLE_ADMIN
+    }
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Ticket> tickets;
        
 }
