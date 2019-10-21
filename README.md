@@ -13,6 +13,14 @@
 - [Nem funkcionális követelmények](#nem-funkcionális-követelmények)
 - [Fogalomjegyzék](#fogalomjegyzék)
 - [Szerepkörök](#szerepkörök)
+- [Adatbázis és táblák](#adatbázis-és-táblák)
+  - [USER](#user)
+  - [TICKET](#ticket)
+  - [PROJECTION](#projection)
+  - [ROOM](#room)
+  - [MOVIE](#movie)
+  - [HERO](#hero)
+- [Autentikáció](#autentikáció)
 
 
 ## Leírás
@@ -74,7 +82,7 @@ pass | varchar | felhasználó jelszava (belépéshez szükséges)
 
 
 
-#### TICKET
+### TICKET
 
 Oszlopnév | Típus | Leírás
 --------- | ----- | ------
@@ -95,7 +103,7 @@ movie_id | int | a vetített film ID-je
 time | timestamp | vetítés ideje
 is_full | tele van-e a vetített terem
 
-#### ROOM:
+### ROOM:
 
 Oszlopnév | Típus | Leírás
 --------- | ----- | ------
@@ -118,7 +126,7 @@ order_num | int | film sorszáma az MCU idővonala szerint
 rate | float | film értékelése  (1-10)
 length | int | film hossza percben
 
-#### HERO
+### HERO
 
 Oszlopnév | Típus | Leírás
 --------- | ----- | ------
@@ -127,6 +135,11 @@ name | varchar | hős identitása (valódi neve)
 alias | varchar | hős neve
 species | varchar | hős faja
 portrayed_by | varchar | hőst megformáló színész neve
+
+## Autentikáció
+
+Az autentikációban annyi különbség van a példaprogramhoz képest, hogy nem felhasználónévvel kell autentikálni, hanem email címmel.
+Adminnál admin@admin.hu, usernél user@user.hu. A jelszü pedig mindkét esetben "password".
 
 ---
 
