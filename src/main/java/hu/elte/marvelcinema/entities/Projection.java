@@ -7,6 +7,7 @@ package hu.elte.marvelcinema.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -41,7 +42,6 @@ public class Projection implements Serializable {
     private Integer id;
     
     @Column
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date time;
     
@@ -49,16 +49,15 @@ public class Projection implements Serializable {
     private boolean isfull;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projection")
-    private List<Ticket> tickets;
+    @JsonIgnore
+    private List<Ticket> tickets = new ArrayList<>();
     
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
     private Room room;
     
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
     private Movie movie;
     
 }

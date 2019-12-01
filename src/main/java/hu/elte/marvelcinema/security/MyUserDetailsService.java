@@ -25,25 +25,25 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
-
+    
     @Autowired
     private UserRepository userRepository;
-
+    
     @Autowired 
     private AuthenticatedUser authenticatedUser;
-
+    
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> oUser = userRepository.findByEmail(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> oUser = userRepository.findByEmail(email);
         if (!oUser.isPresent()) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(email);
         }
         User user = oUser.get();
         authenticatedUser.setUser(user);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPass(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), grantedAuthorities);
     }
 }

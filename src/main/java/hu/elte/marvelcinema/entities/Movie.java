@@ -5,9 +5,10 @@
  */
 package hu.elte.marvelcinema.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -68,11 +69,22 @@ public class Movie implements Serializable {
     @NotNull
     private Integer length;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
-    private List<Projection> projections;
+    @OneToMany(mappedBy = "movie")
+    @JsonIgnore
+    private List<Projection> projections = new ArrayList<>();
        
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable
-    private List<Hero> heroes;
+    private List<Hero> heroes = new ArrayList<>();
+    
+    public void addHero(Hero hero) {
+        this.heroes.add(hero);
+        hero.getMovies().add(this);
+    }
+    
+    public void removeHero(Hero hero) {
+        this.heroes.remove(hero);
+        hero.getMovies().remove(this);
+    }
             
 }

@@ -9,11 +9,14 @@ import hu.elte.marvelcinema.entities.Ticket;
 import hu.elte.marvelcinema.entities.User;
 import hu.elte.marvelcinema.repositories.TicketRepository;
 import hu.elte.marvelcinema.repositories.UserRepository;
+import hu.elte.marvelcinema.security.AuthenticatedUser;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Zsár Ádám Ottó
  */
+@CrossOrigin
 @RestController
+@RequestMapping("/users")
 public class UserController {
   @Autowired
   private UserRepository userRepository;
@@ -37,13 +42,17 @@ public class UserController {
   
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
+  
+  @Autowired 
+  private AuthenticatedUser authenticatedUser;
 
-  @GetMapping("/users")
+  @GetMapping("")
   public ResponseEntity<Iterable<User>> getAll() {
     return ResponseEntity.ok(userRepository.findAll());
   }
 
-  @GetMapping("/users/{id}")
+  @GetMapping("/{id}")
+  @Secured({ "ROLE_ADMIN" })
   public ResponseEntity<User> get(@PathVariable Integer id) {
     Optional<User> user = userRepository.findById(id);
     if (!user.isPresent())
@@ -54,7 +63,8 @@ public class UserController {
     return ResponseEntity.ok(user.get());
   }
   
-  @GetMapping("/users/{id}/tickets")
+  @GetMapping("/{id}/tickets")
+  @Secured({ "ROLE_ADMIN", "ROLE_USER" })
   public ResponseEntity<Iterable<Ticket>> tickets(@PathVariable Integer id) {
       Optional<User> oUser = userRepository.findById(id);
       if (oUser.isPresent()) {
@@ -70,23 +80,28 @@ public class UserController {
     if (oUser.isPresent()) {
         return ResponseEntity.badRequest().build();
     }
-    user.setPass(passwordEncoder.encode(user.getPass()));
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     user.setEnabled(true);
     user.setRole(User.Role.ROLE_USER);
     return ResponseEntity.ok(userRepository.save(user));
   }
   
   @PostMapping("login")
-  public ResponseEntity login(@RequestBody User user) {
-    return ResponseEntity.ok().build();
-  } 
+  public ResponseEntity login() {
+    return ResponseEntity.ok(authenticatedUser.getUser());
+  }
   
-  @PostMapping("/users/{id}/tickets")
+  @PostMapping("/{id}/tickets")
   @Secured({ "ROLE_ADMIN" })
   public ResponseEntity<Ticket> insertTicket(@PathVariable Integer id, @RequestBody Ticket ticket) {
       Optional<User> oUser = userRepository.findById(id);
       if (oUser.isPresent()) {
           User user = oUser.get();
+          if( ticket.getId() != null && ticketRepository.findById(ticket.getId()).isPresent() ) {
+              Ticket existingTicket = ticketRepository.findById(ticket.getId()).get();
+              existingTicket.setUser(user);
+              return ResponseEntity.ok(ticketRepository.save(existingTicket));
+          }
           ticket.setUser(user);
           return ResponseEntity.ok(ticketRepository.save(ticket));
       } else {
@@ -94,7 +109,7 @@ public class UserController {
       }
   }
   
-  @PutMapping("/users/{id}")
+  @PutMapping("/{id}")
   @Secured({ "ROLE_ADMIN" })
   public ResponseEntity<User> put(@PathVariable Integer id, @RequestBody User user) {
     Optional<User> oldUser = userRepository.findById(id);
@@ -107,7 +122,53 @@ public class UserController {
     return ResponseEntity.ok(userRepository.save(user));
   }
   
-  @DeleteMapping("/users/{id}")
+    @PutMapping("/{id}/tickets")
+    @Secured({ "ROLE_ADMIN" })
+    public ResponseEntity<Iterable<Ticket>> modifyTickets(@PathVariable Integer id, @RequestBody List<Ticket> tickets) {
+        Optional<User> oUser = userRepository.findById(id);
+        Iterable<Ticket> oldTickets = ticketRepository.findAll();
+        if (oUser.isPresent()) {
+            User user = oUser.get();
+            
+            oldTickets.forEach(ticket -> {
+                ticket.setUser(null);
+            });
+            user.getTickets().clear();
+
+            // if we would like to add new labels as well
+            for (Ticket ticket: tickets) {
+                ticket.setUser(user);
+                ticketRepository.save(ticket);
+            }
+
+            userRepository.save(user);
+            return ResponseEntity.ok(tickets);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @PutMapping("/{id}/tickets/clear")
+    @Secured({ "ROLE_ADMIN" })
+    public ResponseEntity<Iterable<Ticket>> clearTickets(@PathVariable Integer id) {
+        Optional<User> oUser = userRepository.findById(id);
+        Iterable<Ticket> oldTickets = ticketRepository.findAll();
+        if (oUser.isPresent()) {
+            User user = oUser.get();
+            
+            oldTickets.forEach(ticket -> {
+                ticket.setUser(null);
+            });
+            user.getTickets().clear();
+
+            userRepository.save(user);
+            return ResponseEntity.ok(user.getTickets());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+  
+  @DeleteMapping("/{id}")
   @Secured({ "ROLE_ADMIN" })
   public ResponseEntity delete(@PathVariable Integer id) {
     Optional<User> user = userRepository.findById(id);

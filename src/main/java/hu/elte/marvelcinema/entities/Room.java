@@ -7,6 +7,7 @@ package hu.elte.marvelcinema.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,6 +49,7 @@ public class Room implements Serializable {
     private Integer seats;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
-    private List<Projection> projections;
+    @JsonIgnore
+    private List<Projection> projections = new ArrayList<>();
        
 }

@@ -47,12 +47,10 @@ public class Ticket implements Serializable {
     
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
     private User user;
     
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
     private Projection projection;
     
 }

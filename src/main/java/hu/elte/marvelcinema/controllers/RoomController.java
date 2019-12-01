@@ -9,10 +9,12 @@ import hu.elte.marvelcinema.entities.Projection;
 import hu.elte.marvelcinema.entities.Room;
 import hu.elte.marvelcinema.repositories.ProjectionRepository;
 import hu.elte.marvelcinema.repositories.RoomRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Zsár Ádám Ottó
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/rooms")
 public class RoomController {
@@ -75,6 +78,12 @@ public class RoomController {
       Optional<Room> oRoom = roomRepository.findById(id);
       if (oRoom.isPresent()) {
           Room room = oRoom.get();
+          if(projection.getId() != null && projectionRepository.findById(projection.getId()).isPresent()) {
+              Projection existingProjection = projectionRepository.findById(projection.getId()).get();
+              existingProjection.setRoom(room);
+              return ResponseEntity.ok(projectionRepository.save(existingProjection));
+          }
+          
           projection.setRoom(room);
           return ResponseEntity.ok(projectionRepository.save(projection));
       } else {
@@ -93,6 +102,49 @@ public class RoomController {
 
     room.setId(id);
     return ResponseEntity.ok(roomRepository.save(room));
+  }
+  
+  @PutMapping("/{id}/projections")
+  @Secured({ "ROLE_ADMIN" })
+  public ResponseEntity<Iterable<Projection>> modifyProjections(@PathVariable Integer id, @RequestBody List<Projection> projections) {
+      Optional<Room> oRoom = roomRepository.findById(id);
+      Iterable<Projection> oldTickets = projectionRepository.findAll();
+      if (oRoom.isPresent()) {
+          Room room = oRoom.get();
+        
+          oldTickets.forEach(ticket -> {
+              ticket.setRoom(null);
+          });
+          room.getProjections().clear();
+           // if we would like to add new labels as well
+          for (Projection projection: projections) {
+              projection.setRoom(room);
+              projectionRepository.save(projection);
+          }
+           roomRepository.save(room);
+          return ResponseEntity.ok(projections);
+      } else {
+          return ResponseEntity.notFound().build();
+      }
+  }
+  
+  @PutMapping("/{id}/projections/clear")
+  @Secured({ "ROLE_ADMIN" })
+  public ResponseEntity<Iterable<Projection>> clearProjections(@PathVariable Integer id) {
+      Optional<Room> oRoom = roomRepository.findById(id);
+      Iterable<Projection> oldTickets = projectionRepository.findAll();
+      if (oRoom.isPresent()) {
+          Room room = oRoom.get();
+        
+          oldTickets.forEach(ticket -> {
+              ticket.setRoom(null);
+          });
+          room.getProjections().clear();
+          roomRepository.save(room);
+          return ResponseEntity.ok(room.getProjections());
+      } else {
+          return ResponseEntity.notFound().build();
+      }
   }
   
   @DeleteMapping("/{id}")

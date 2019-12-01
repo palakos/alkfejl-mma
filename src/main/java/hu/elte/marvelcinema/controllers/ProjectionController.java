@@ -5,14 +5,17 @@
  */
 package hu.elte.marvelcinema.controllers;
 
+import hu.elte.marvelcinema.entities.Movie;
 import hu.elte.marvelcinema.entities.Projection;
 import hu.elte.marvelcinema.entities.Ticket;
 import hu.elte.marvelcinema.repositories.ProjectionRepository;
 import hu.elte.marvelcinema.repositories.TicketRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Zsár Ádám Ottó
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/projections")
 public class ProjectionController {
@@ -52,7 +56,7 @@ public class ProjectionController {
   }
   
   @GetMapping("/{id}/tickets")
-  @Secured({ "ROLE_ADMIN" })
+  @Secured({ "ROLE_ADMIN", "ROLE_USER" })
   public ResponseEntity<Iterable<Ticket>> tickets(@PathVariable Integer id) {
       Optional<Projection> oProjection = projectionRepository.findById(id);
       if (oProjection.isPresent()) {
@@ -70,17 +74,23 @@ public class ProjectionController {
   }
   
   @PostMapping("/{id}/tickets")
-  @Secured({ "ROLE_ADMIN" })
-  public ResponseEntity<Ticket> insertMessage(@PathVariable Integer id, @RequestBody Ticket ticket) {
+  @Secured({ "ROLE_ADMIN", "ROLE_USER" })
+  public ResponseEntity<Ticket> insertTicket(@PathVariable Integer id, @RequestBody Ticket ticket) {
       Optional<Projection> oProjection = projectionRepository.findById(id);
       if (oProjection.isPresent()) {
           Projection projection = oProjection.get();
+          if( ticket.getId() != null && ticketRepository.findById(ticket.getId()).isPresent() ) {
+              Ticket existingTicket = ticketRepository.findById(ticket.getId()).get();
+              existingTicket.setProjection(projection);    
+              return ResponseEntity.ok(ticketRepository.save(existingTicket));
+          }
           ticket.setProjection(projection);
           return ResponseEntity.ok(ticketRepository.save(ticket));
       } else {
           return ResponseEntity.notFound().build();
       }
   }
+  
   
   @PutMapping("/{id}")
   @Secured({ "ROLE_ADMIN" })
@@ -94,6 +104,53 @@ public class ProjectionController {
     projection.setId(id);
     return ResponseEntity.ok(projectionRepository.save(projection));
   }
+  
+    @PutMapping("/{id}/tickets")
+    @Secured({ "ROLE_ADMIN", "ROLE_USER" })
+    public ResponseEntity<Iterable<Ticket>> modifyTickets(@PathVariable Integer id, @RequestBody List<Ticket> tickets) {
+        Optional<Projection> oProjection = projectionRepository.findById(id);
+        Iterable<Ticket> oldTickets = ticketRepository.findAll();
+        if (oProjection.isPresent()) {
+            Projection projection = oProjection.get();
+            
+            oldTickets.forEach(ticket -> {
+                ticket.setProjection(null);
+            });
+            projection.getTickets().clear();
+
+            // if we would like to add new labels as well
+            for (Ticket ticket: tickets) {
+                ticket.setProjection(projection);
+                ticketRepository.save(ticket);
+            }
+
+            projectionRepository.save(projection);
+            return ResponseEntity.ok(tickets);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    
+    @PutMapping("/{id}/tickets/clear")
+    @Secured({ "ROLE_ADMIN", "ROLE_USER" })
+    public ResponseEntity<Iterable<Ticket>> clearTickets(@PathVariable Integer id) {
+        Optional<Projection> oProjection = projectionRepository.findById(id);
+        Iterable<Ticket> oldTickets = ticketRepository.findAll();
+        if (oProjection.isPresent()) {
+            Projection projection = oProjection.get();
+            
+            oldTickets.forEach(ticket -> {
+                ticket.setProjection(null);
+            });
+            projection.getTickets().clear();
+
+            projectionRepository.save(projection);
+            return ResponseEntity.ok(projection.getTickets());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
   
   @DeleteMapping("/{id}")
   @Secured({ "ROLE_ADMIN" })

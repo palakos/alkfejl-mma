@@ -5,16 +5,15 @@
  */
 package hu.elte.marvelcinema.controllers;
 
-import hu.elte.marvelcinema.entities.Projection;
 import hu.elte.marvelcinema.entities.Ticket;
 import hu.elte.marvelcinema.entities.User;
-import hu.elte.marvelcinema.repositories.ProjectionRepository;
 import hu.elte.marvelcinema.repositories.TicketRepository;
-import hu.elte.marvelcinema.repositories.UserRepository;
+import hu.elte.marvelcinema.security.AuthenticatedUser;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,22 +27,26 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Zsár Ádám Ottó
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
   @Autowired
   private TicketRepository ticketRepository;
   
-  @Autowired
-  private UserRepository userRepository;
+  @Autowired 
+  private AuthenticatedUser authenticatedUser;
   
-  @Autowired
-  private ProjectionRepository projectionRepository;
-
   @GetMapping("")
-  @Secured({ "ROLE_ADMIN" })
+  @Secured({ "ROLE_USER", "ROLE_ADMIN" })
   public ResponseEntity<Iterable<Ticket>> getAll() {
-    return ResponseEntity.ok(ticketRepository.findAll());
+    User user = authenticatedUser.getUser();
+    User.Role role = user.getRole();
+    if (role.equals(User.Role.ROLE_ADMIN)) {
+        return ResponseEntity.ok(ticketRepository.findAll());
+    } else {
+        return ResponseEntity.ok(ticketRepository.findAllByUser(user));
+    }
   }
 
   @GetMapping("/{id}")

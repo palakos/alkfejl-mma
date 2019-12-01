@@ -5,6 +5,8 @@
  */
 package hu.elte.marvelcinema.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,7 +46,7 @@ public class User {
     
     @Column()
     @NotNull
-    private String pass;
+    private String password;
     
     @Column()
     @NotNull
@@ -60,6 +62,7 @@ public class User {
     }
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Ticket> tickets;
+    @JsonIgnore
+    private List<Ticket> tickets = new ArrayList<>();
        
 }
