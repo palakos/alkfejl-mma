@@ -1,0 +1,27 @@
+<div class="row d-flex justify-content-center my-4">
+  <div class="col-12">
+    <div class="card">
+      <h4 class="card-header text-center text-white bg-secondary">{{hero.alias}}</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-sm-6" fxLayout="column" fxLayoutAlign="center">
+            <div> <strong>Valódi név:</strong> {{hero.name}} </div>
+            <div> <strong>Faj:</strong> {{hero.species}} </div>
+            <div> <strong>Megformáló:</strong> {{hero.portrayed_by}} </div>
+            <div class="my-3" fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="authService.isLoggedIn() && isAdmin()">
+              <button mat-flat-button class="btn-marvel" [routerLink]="['/heroes', hero.id, 'edit']">Szerkesztés</button>
+              <button mat-raised-button class="btn-marvel" (click)="onDeleteClick(hero.id)">Törlés</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6" fxLayout="column" fxLayoutAlign="center center">
+            <img src="assets/img/heroes/{{hero.id}}.jpg" onerror="this.src='assets/img/heroes/avengers.jpg'" class="img-fluid" style="height: 600px;" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button mat-raised-button class="btn-marvel" routerLink="/heroes">Vissza a Hősökhöz</button>

@@ -1,0 +1,124 @@
+<form class="text-center mt-4" (submit)="submit(movieForm)" #movieForm="ngForm">
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="title_hu"
+             [(ngModel)]="model.title_hu"
+             type="text"
+             aria-describedby="title_huHelp"
+             placeholder="Film magyar címe"
+             required
+             #title_hu="ngModel">
+      <mat-error *ngIf="title_hu.invalid && (title_hu.dirty || title_hu.touched) && title_hu.errors.required">
+        Film magyar címe <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="title_en"
+             [(ngModel)]="model.title_en"
+             type="text"
+             aria-describedby="title_enHelp"
+             placeholder="Film angol címe"
+             required
+             #title_en="ngModel">
+      <mat-error *ngIf="title_en.invalid && (title_en.dirty || title_en.touched) && title_en.errors.required">
+        Film angol címe kötelező <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="year"
+             [(ngModel)]="model.year"
+             type="number"
+             aria-describedby="yearHelp"
+             placeholder="Film bemutatójának éve"
+             required
+             #year="ngModel">
+      <mat-error *ngIf="year.invalid && (year.dirty || year.touched) && year.errors.required">
+        Film bemutatójának éve <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="descriptionHelp" class="form-text text-muted">The error details</small> -->
+    <mat-form-field>
+      <textarea name="desc" [(ngModel)]="model.desc" matInput aria-describedby="descHelp" placeholder="Film rövid leírása" required #desc="ngModel"></textarea>
+      <mat-error *ngIf="desc.invalid && (desc.dirty || desc.touched) && desc.errors.required">
+        Film rövid leírása <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="phase"
+             [(ngModel)]="model.phase"
+             type="number"
+             aria-describedby="phaseHelp"
+             placeholder="MCU fázis"
+             required
+             #phase="ngModel">
+      <mat-error *ngIf="phase.invalid && (phase.dirty || phase.touched) && phase.errors.required">
+        MCU fázis <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="rate"
+             [(ngModel)]="model.rate"
+             type="number"
+             aria-describedby="rateHelp"
+             placeholder="Film értékelése tízes skálán"
+             required
+             #rate="ngModel">
+      <mat-error *ngIf="rate.invalid && (rate.dirty || rate.touched) && rate.errors.required">
+        Film értékelése <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="length"
+             [(ngModel)]="model.length"
+             type="number"
+             aria-describedby="lengthHelp"
+             placeholder="Film hossza percben megadva"
+             required
+             #length="ngModel">
+      <mat-error *ngIf="length.invalid && (length.dirty || length.touched) && length.errors.required">
+        Film hossza <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <h2>Hősök rendelése a filmhez</h2>
+    <div fxLayout="column" fxLayoutAlign="start">
+      <mat-checkbox color="warn" *ngFor="let hero of heroList" [checked]="hero.checked" (change)="hero.checked = !hero.checked">{{hero.alias}}</mat-checkbox>
+    </div>
+  </div>
+
+  <button [disabled]="!movieForm.valid" type="submit" mat-raised-button class="btn-marvel">Film mentése</button>
+</form>

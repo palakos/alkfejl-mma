@@ -1,0 +1,14 @@
+<div class="my-3" fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="authService.isLoggedIn() && isAdmin()">
+  <button mat-flat-button class="btn-marvel" [routerLink]="['/heroes/new']">Új hős hozzáadása</button>
+</div>
+
+<div id="heroes" class="row d-flex justify-content-center my-4">
+  <div class="card col-10 col-sm-6 col-lg-4 col-xl-3 mx-auto" *ngFor="let hero of heroes">
+    <a [routerLink]="['/heroes', hero.id]">
+      <img class="card-img-top" style="height: 22em;" src="assets/img/heroes/{{hero.id}}.jpg" onerror="this.src='assets/img/heroes/avengers.jpg'" title="{{hero.alias}}" alt="{{hero.alias}}" />
+    </a>
+    <div class="card-body m-auto">
+      <p class="card-title text-center"><cite>{{hero.alias}}</cite></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<form id="login-form" class="text-center mt-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Regisztráció</h2>
+
+  <mat-form-field>
+    <input matInput placeholder="Név" formControlName="name" required>
+    <mat-error *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.required">Név <strong>kötelező</strong></mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Email cím" formControlName="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+    <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.required">Email cím <strong>kötelező</strong></mat-error>
+    <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.pattern">
+      Kérlek, <strong>valós</strong> email címet adj meg!
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="mt-2">
+    <input matInput placeholder="Jelszó" formControlName="password" required [type]="hidePassword ? 'password' : 'text'">
+    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <mat-error *ngIf="password.invalid">Jelszó <strong>kötelező</strong></mat-error>
+  </mat-form-field>
+
+  <div class="mt-2">
+    <button mat-flat-button type="submit" class="btn-marvel" [disabled]="form.invalid">Regisztráció</button>
+  </div>
+  <div class="mt-2" *ngIf="message">
+    <mat-error>{{message}}</mat-error>
+  </div>
+</form>

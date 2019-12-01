@@ -1,0 +1,28 @@
+<h1 class="text-center my-2">Jegyeim</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Film címe</th>
+      <th scope="col">Vetítés ideje</th>
+      <th scope="col">Vetítés helyszíne</th>
+      <th scope="col">Sor</th>
+      <th scope="col">Szék</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ticket of tickets; let i=index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ ticket.projection.movie.title_hu }}</td>
+      <td>{{ ticket.projection.time | date: 'yyyy. MM. dd. HH:mm' }}</td>
+      <td>{{ ticket.projection.room.name }} terem</td>
+      <td>{{ ticket.row_num }} </td>
+      <td>{{ ticket.seat_num }} </td>
+      <td>
+        <button mat-raised-button class="btn-marvel" (click)="onDeleteClick(ticket.id)">Törlés</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

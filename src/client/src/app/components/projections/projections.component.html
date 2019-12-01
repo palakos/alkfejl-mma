@@ -1,0 +1,34 @@
+<h1 class="text-center my-2">Vetítések listája</h1>
+
+<div class="my-3" fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="authService.isLoggedIn() && isAdmin()">
+  <button mat-flat-button class="btn-marvel" [routerLink]="['/projections/new']">Új vetítés hozzáadása</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Vetített film</th>
+      <th scope="col">Vetítés ideje</th>
+      <th scope="col">Vetítés helyszíne</th>
+      <th scope="col">Vetítés megtelt</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let projection of projections; let i=index" (click)="onSelectProjection(projection)" [class.table-info]="projection === selectedProjection">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ projection.movie.title_hu }}</td>
+      <td>{{ projection.time | date: 'yyyy. MM. dd. HH:mm' }}</td>
+      <td>{{ projection.room.name }} terem</td>
+      <td>{{ projection.isfull ? 'Igen' : 'Nem' }} </td>
+      <td>
+        <button mat-raised-button class="btn-marvel" [routerLink]="['/projections', projection.id, 'edit']">Szerkesztés</button>
+      </td>
+      <td>
+        <button mat-raised-button class="btn-marvel" (click)="onDeleteClick(projection.id)">Törlés</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

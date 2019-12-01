@@ -1,0 +1,140 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+  font-family: Marvel;
+  src: url(assets/fonts/Marvel-Regular.ttf) format("opentype");
+}
+
+.logo-title {
+  font-family: 'Marvel', 'arial', sans-serif;
+  font-size: 1.5em;
+  padding-top: 10px
+}
+
+ mat-form-field {
+    width: 200px;
+  }
+
+.form-group mat-form-field,
+material-timepicker {
+  width: 400px;
+}
+
+.form-group textarea {
+  height: 200px;
+}
+
+@media (min-width: 768px) {
+
+  #main {
+    width: 82% !important;
+  }
+}
+
+@media (min-width: 992px) {
+
+  #main {
+    width: 77% !important;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  #main {
+    width: 64% !important;
+  }
+}
+
+#main {
+  min-height: 50%;
+  width: 90%;
+  margin: 20px auto;
+}
+
+#movies .card,
+#heroes .card
+{
+  border: 0;
+}
+
+#herologos img:hover {
+  cursor: pointer;
+}
+
+#movies .card-body,
+#heroes .card-body {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.card-img-top {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  -moz-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: box-shadow, transform;
+  -moz-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+}
+
+  .card-img-top:hover, .card-img-top:focus, .card-img-top:active {
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+
+.btn-marvel {
+  color: #fff;
+  background-color: #ed1a23;
+  border-color: #ed1a23;
+}
+
+  .btn-marvel:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+
+  .btn-marvel:focus, .btn-marvel.focus {
+    box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
+  }
+
+  .btn-marvel.disabled, .btn-marvel:disabled {
+    color: #fff;
+    background-color: #ed1a23;
+    border-color: #ed1a23;
+  }
+
+  .btn-marvel:not(:disabled):not(.disabled):active, .btn-marvel:not(:disabled):not(.disabled).active,
+  .show > .btn-marvel.dropdown-toggle {
+    color: #fff;
+    background-color: #bd2130;
+    border-color: #b21f2d;
+  }
+
+    .btn-marvel:not(:disabled):not(.disabled):active:focus, .btn-marvel:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-marvel.dropdown-toggle:focus {
+      box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
+    }
+
+
+.bg-marvel {
+  background-color: #ed1a23 !important;
+}
+
+a.bg-marvel:hover, a.bg-marvel:focus,
+button.bg-marvel:hover,
+button.bg-marvel:focus {
+  background-color: #bd2130 !important;
+}

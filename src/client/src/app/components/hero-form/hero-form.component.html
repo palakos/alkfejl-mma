@@ -1,0 +1,79 @@
+<form class="text-center mt-4" (submit)="submit(heroForm)" #heroForm="ngForm">
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="name"
+             [(ngModel)]="model.name"
+             type="text"
+             aria-describedby="nameHelp"
+             placeholder="Hős valódi neve"
+             required
+             #name="ngModel">
+      <mat-error *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.required">
+        Hős valódi neve <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="alias"
+             [(ngModel)]="model.alias"
+             type="text"
+             aria-describedby="aliasHelp"
+             placeholder="Hős neve"
+             required
+             #alias="ngModel">
+      <mat-error *ngIf="alias.invalid && (alias.dirty || alias.touched) && alias.errors.required">
+        Hős neve <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="species"
+             [(ngModel)]="model.species"
+             type="text"
+             aria-describedby="speciesHelp"
+             placeholder="Hős faja"
+             required
+             #species="ngModel">
+      <mat-error *ngIf="species.invalid && (species.dirty || species.touched) && species.errors.required">
+        Hős faja <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <mat-form-field>
+      <input matInput
+             name="portrayed_by"
+             [(ngModel)]="model.portrayed_by"
+             type="text"
+             aria-describedby="portrayed_byHelp"
+             placeholder="Hős megformálója"
+             required
+             #portrayed_by="ngModel">
+      <mat-error *ngIf="portrayed_by.invalid && (portrayed_by.dirty || portrayed_by.touched) && portrayed_by.errors.required">
+        Hős megformálója <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+    <h2>Filmek rendelése a hőshöz</h2>
+    <div fxLayout="column" fxLayoutAlign="start">
+      <mat-checkbox color="warn" *ngFor="let movie of movieList" [checked]="movie.checked" (change)="movie.checked = !movie.checked" >{{movie.title_hu}}</mat-checkbox>
+    </div>
+  </div>
+
+  <button [disabled]="!heroForm.valid" type="submit" mat-raised-button class="btn-marvel">Hős mentése</button>
+</form>

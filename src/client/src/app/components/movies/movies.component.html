@@ -1,0 +1,15 @@
+
+  <div class="my-3" fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="authService.isLoggedIn() && isAdmin()">
+    <button mat-flat-button class="btn-marvel" [routerLink]="['/movies/new']">Új film hozzáadása</button>
+  </div>
+
+<div id="movies" class="row d-flex justify-content-center my-4" >
+  <div class="card col-10 col-sm-6 col-lg-4 col-xl-3 mx-auto" *ngFor="let movie of movies">
+    <a [routerLink]="['/movies', movie.id]">
+      <img class="card-img-top" style="height: 22em;" src="assets/img/movies/{{movie.id}}.jpg" onerror="this.src='assets/img/movies/avengers.jpg'" title="{{movie.title_hu}}" alt="{{movie.title_hu}}" />
+    </a>
+    <div class="card-body m-auto">
+      <p class="card-title text-center"><cite>{{movie.title_hu}}</cite></p>
+    </div>
+  </div>
+  </div>

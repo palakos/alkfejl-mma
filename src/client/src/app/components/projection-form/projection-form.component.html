@@ -1,0 +1,42 @@
+<form class="mt-4" (submit)="submit(heroForm)" #heroForm="ngForm">
+  <div class="form-group">
+    <!-- <small id="locationHelp" class="form-text text-muted">Give the location of the issue (e.g. labor)</small> -->
+
+    <mat-form-field color="warn">
+      <input matInput [matDatepicker]="datepicker" placeholder="Vetítés napja" [formControl]="date">
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
+    </mat-form-field>
+
+    <material-timepicker color="warn" label="Vetítés ideje" appearance="standard" [userTime]="exportTime" (change)="onChangeHour($event)" revertLabel="Remove" submitLabel="Ok"></material-timepicker>
+
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="descriptionHelp" class="form-text text-muted">The error details</small> -->
+    <mat-form-field>
+      <mat-label>Film</mat-label>
+      <select matNativeControl name="projMovie" [(ngModel)]="movie" (ngModelChange)="changeMovie($event)" required #projMovie="ngModel">
+        <option *ngFor="let mv of movies" [ngValue]="mv.id" [selected]="model.movie && model.movie.id == mv.id">{{mv.title_hu}}</option>
+      </select>
+      <mat-error *ngIf="projMovie.invalid && (projMovie.dirty || projMovie.touched) && projMovie.errors.required">
+        Film <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <!-- <small id="descriptionHelp" class="form-text text-muted">The error details</small> -->
+    <mat-form-field>
+      <mat-label>Terem</mat-label>
+      <select matNativeControl name="projRoom" [(ngModel)]="room" (ngModelChange)="changeRoom($event)" required #projRoom="ngModel">
+        <option *ngFor="let rm of rooms" [ngValue]="rm.id" [selected]="model.room && model.room.id == rm.id">{{rm.name}} terem</option>
+      </select>
+      <mat-error *ngIf="projRoom.invalid && (projRoom.dirty || projRoom.touched) && projRoom.errors.required">
+        Terem <strong>kötelező</strong>!
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <button [disabled]="!heroForm.valid" type="submit" mat-raised-button class="btn-marvel">Vetítés mentése</button>
+</form>

@@ -1,0 +1,22 @@
+<h1 class="text-center my-2">{{ title }}</h1>
+<h2 *ngIf="projection && projection.movie" class="text-center my-2">{{ projection.movie.title_hu }}</h2>
+<h2 *ngIf="projection && projection.time"  class="text-center my-2">{{ projection.time | date: 'yyyy. MM. dd. HH:mm' }}</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th *ngFor="let s of arrayN(seats); let h=index" scope="col">{{h+1}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of arrayN(rows); let i=index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td *ngFor="let c of arrayN(seats); let j=index">
+        <mat-checkbox color="warn" [checked]="buys[i][j]==1" [disabled]="!buys[i][j]" (change)="switchTicket(i, j)"></mat-checkbox>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button mat-raised-button class="text-center btn-marvel" (click)="buyTickets()">Jegyek megvétele</button>

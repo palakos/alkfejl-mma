@@ -1,0 +1,62 @@
+<div class="row d-flex justify-content-center my-4">
+  <div class="col-12">
+    <div class="card">
+      <h4 class="card-header text-center text-white bg-secondary">{{movie.title_hu}}</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-lg-6" fxLayout="column" fxLayoutAlign="center">
+            <div> <strong>Angol cím:</strong> {{movie.title_en}} </div>
+            <div> <strong>Bemutató éve:</strong> {{movie.year}} </div>
+            <div> <strong>Film leírása:</strong><br /> {{movie.desc}} </div>
+            <div> <strong>MCU fázis:</strong> {{movie.phase}} </div>
+            <div> <strong>Film hossza:</strong> {{movie.length}} perc </div>
+            <div> <strong>Film értékelése:  </strong> <meter max="10" min="0" value="{{movie.rate}}"></meter> {{movie.rate}}/10 </div>
+            <h3 class="my-2">Hősök:</h3>
+            <div id="herologos" class="mb-3">
+              <img *ngFor="let hero of heroes" src="assets/img/logos/{{hero.id}}.png" onerror="this.src='assets/img/logos/avengers.png'" [routerLink]="['/heroes', hero.id]" class="img-fluid" style="height: 100px;" />
+            </div>
+
+
+            <div class="my-3" fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="authService.isLoggedIn() && isAdmin()">
+              <button mat-raised-button class="btn-marvel" [routerLink]="['/movies', movie.id, 'edit']">Szerkesztés</button>
+              <button mat-raised-button class="btn-marvel" (click)="onDeleteClick(movie.id)">Törlés</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6" fxLayout="column" fxLayoutAlign="center center">
+            <img *ngIf="movie" src="assets/img/movies/{{movie.id}}.jpg" onerror="this.src='assets/img/movies/avengers.jpg'" class="img-fluid" style="height: 600px;" />
+          </div>
+        </div>
+        <div class="row my-3">
+          <table class="table">
+            <thead class="text-white bg-secondary">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Időpont</th>
+                <th scope="col">Helyszín</th>
+                <th scope="col"> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let projection of projections; let i = index">
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ projection.time | date: 'yyyy. MM. dd. HH:mm' }}</td>
+                <td>{{ projection.room.name }} terem</td>
+                <td>
+                  <button *ngIf="!projection.isfull" mat-raised-button class="btn-marvel" [routerLink]="['/projections', projection.id, 'buyticket']">Jegyvásárlás</button>
+                  <button *ngIf="projection.isfull" mat-raised-button class="btn-marvel" disabled>Teltház</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+
+
+        </div>
+      </div>
+  </div>
+</div>
+
+<button mat-raised-button class="btn-marvel" routerLink="/movies">Vissza a filmekhez</button>

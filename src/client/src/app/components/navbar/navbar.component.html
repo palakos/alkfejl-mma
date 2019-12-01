@@ -1,0 +1,60 @@
+<mat-toolbar class="text-white bg-marvel">
+  <div class="navbar-brand" routerLink="/">
+    <span class="logo-title">MARVEL MOZI APP</span>
+  </div>
+
+  <span class="fill-remaining-space" fxHide="false" fxHide.gt-sm></span>
+  <div fxLayout="row" fxFlex fxShow="false" fxShow.gt-sm fxLayoutAlign="start">
+ 
+    <div *ngIf="authService.isLoggedIn()">
+      <button mat-button routerLink="/mytickets">Jegyeim</button>
+      <button mat-button routerLink="/movies">Filmek</button>
+      <button mat-button routerLink="/heroes">Hősök</button>
+    </div>
+
+    <div *ngIf="authService.isLoggedIn() && isAdmin()">
+      <button mat-button routerLink="/projections">Vetítések</button>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxFlex fxShow="false" fxShow.gt-sm fxLayoutAlign="end">
+    <div *ngIf="!authService.isLoggedIn()">
+      <button mat-button routerLink="/register">Regisztráció</button>
+      <button mat-button routerLink="/login">Bejelentkezés</button>
+    </div>
+
+    <div *ngIf="authService.isLoggedIn()">
+      <span>Üdvözöllek, {{ authService.user.name }}!</span>
+      <button mat-button (click)="logout()">Kijelentkezés</button>
+    </div>
+  </div>
+
+    <div fxLayout="row" fxFlex fxHide="false" fxHide.gt-sm fxLayoutAlign="end">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+</mat-toolbar>
+<mat-menu xPosition="before" #menu="matMenu">
+
+  <div *ngIf="authService.isLoggedIn()">
+    <button mat-button routerLink="/mytickets">Jegyeim</button>
+    <button mat-button routerLink="/movies">Filmek</button>
+    <button mat-button routerLink="/heroes">Hősök</button>
+  </div>
+
+  <div *ngIf="authService.isLoggedIn() && isAdmin()">
+    <button mat-button routerLink="/projections">Vetítések</button>
+  </div>
+
+
+  <hr />
+  <div *ngIf="!authService.isLoggedIn()">
+    <button mat-menu-item routerLink="/register">Regisztráció</button>
+    <button mat-menu-item routerLink="/login">Bejelentkezés</button>
+  </div>
+
+  <div *ngIf="authService.isLoggedIn()">
+    <button mat-button (click)="logout()">Kijelentkezés</button>
+  </div>
+</mat-menu>
