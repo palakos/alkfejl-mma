@@ -9,6 +9,12 @@
 ## Tartalomjegyzék
 
 - [Leírás](#leírás)
+- [Előkészületek](#előkészületek)
+  - [Backend](#pr-backend)
+  - [Frontend](#pr-frontend)
+- [Futtatás](#futtatás)
+  - [Backend](#run-backend)
+  - [Frontend](#run-frontend)
 - [Funkcionális követelmények](#funkcionális-követelmények)
 - [Nem funkcionális követelmények](#nem-funkcionális-követelmények)
 - [Fogalomjegyzék](#fogalomjegyzék)
@@ -29,6 +35,50 @@ Az API egy Marveles mozihoz tartozó adatokat fog kezelni, úgy mint:
 - mozifilmek
 - mozijegyek
 - mozitermek  
+
+## Előkészületek
+A program lokális futtatásához a következőkre van szükség.
+Backend: Apache Maven és Java Development Kit
+Frontend: NodeJs, npm, Angular CLI
+
+### Backend <a name="pr-backend"></a>
+A Java fejlesztőkörnyezet használatához töltsük le a [Java JRE](https://www.java.com/en/download/manual.jsp) és [Java JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) legfrissebb változatát. Telepítés után a parancssori `java -version` paranccsal ellenőrizhetjük a Java megfelelő működését.  
+Windows esetén szükséges lehet bizonyos környezeti változók beállítása. 
+
+Ezekhez a Sajátgép (Újabb Windowsok esetén Ez a gép) jobb klikk → Tulajdonságok → Speciális rendszerbeállítások → Speciális fül → Környezeti változók gomb megnyomása után férünk hozzá. A felhasználói és rendszerváltozók közé érdemes felvenni egy új változót JAVA_HOME néven, értéknek pedig a Java jdk elérési útját kell megadni, ami 64 bites operációs rendszerek esetén a C:\Program Files\Java\jdk1.* ahol a * a jdk aktuális verzióját jelenti. Ezeken kívül pedig a rendszerváltozók PATH változójához hozzá kell adni a jdk bin mappájának elérési útját (C:\Program Files\Java\jdk1.*\bin).
+
+[Töltsük le](https://maven.apache.org/download.cgi) az Apache Mavent és csomagoljuk ki egy megfelelő helyre (pl. C:\Program Files)  
+
+A Maven használatához szintén be kell állítanunk néhány környezeti változót. Ezek a MAVEN_HOME és M2_HOME felhasználói változók, értékük pedig a Maven kicsomagolási helye (pl. C:\Program Files\Maven). Végül pedig a PATH változóhoz hozzá kell adni a Maven bin mappáját (pl. C:\Program Files\Maven\bin). Ha mindent jól csináltunk, akkor az `mvn -version` paranccsal ellenőrizhetjük, hogy működik-e terminálban a Maven.
+
+A Java fejlesztőkörnyezetre mindenképpen szükségünk van, de a backend build-eléséhez és futtatásához használhatunk IDE-t is, pl az [Apache Netbeans](https://netbeans.apache.org/download/index.html) nevű programot.
+
+### Frontend <a name="pr-frontend"></a>
+
+A frontend futtatásához [NodeJS](https://nodejs.org/en/download/) telepítése szükséges. Ennek a telepítése után nem szükséges környezeti változók beállítása, a `node -v` és az `npm -v` parancsokkal ellenőrizhetjük a sikeres telepítést.
+
+Emellett szükségünk van még az [Angular CLI](https://cli.angular.io/) telepítésére. Ezt terminálunkon keresztül a node csomagkezelővel megtehetjük. Írjuk be a `npm install -g @angular/cli` parancsot és várjuk meg, míg az Angular CLI feltelepül.
+
+Most már mindenünk megvan az alkalmazás futtatásához.
+
+## Futtatás
+
+### Backend <a name="run-backend"></a>
+
+Ha manuálisan telepítettük a Mavent, akkor a buildeléshez futtassuk az `mvn clean install` parancsot. Ezzel a backend buildje elkészül. Létrejött egy `target` mappa, ebbe lépjünk be. Windows esetén a futtatáshoz meg kell adnunk egy encoding flag-et, hogy az sql-ből beolvasott adatok megfelelően jelenjenek meg. Tehát Windows esetén futtassuk a `java -Dfile.encoding=utf-8 -jar MarvelCinema-0.0.1-SNAPSHOT.jar` parancsot. Unix alapú rendszereknél az encoding flag nem szükséges, ott elég futtatni a
+`java -jar MarvelCinema-0.0.1-SNAPSHOT.jar` parancsot.
+
+Ha IDE-t használunk, mint pl. Netbeans, akkor csak be kell tölteni a backendet és a program segítségével kell build-elni. Ekkor a Netbeans letölti a szükséges csomagokat. Sajnos a Netbeans sem kezeli jól a karakterkódolást, ezért futtatás előtt a projektre jobb gombbal kattintva, a Properties-re kattintva a Categories → Build → Run fül alatt be kell állítani egyrészt a Main Class értékét `hu.elte.marvelcinema.MarvelCinemaApplication`-re, de ami még fontosabb, hogy a VM Options részhez hozzá kell adni azt, hogy `-Dfile.encoding=utf-8` ahogy azt az alábbi kép is mutatja. Más IDE programoknál, mint pl. IntelliJ, nem szükséges ez a beállítás.
+
+Karakterkódolás beállítása
+![Karakterkódolás beállítása](./img/encoding.png "Karakterkódolás beállítása")
+
+### Frontend <a name="run-frontend"></a>
+
+A frontend futtatásához lépjünk be terminállal az `src/client` mappába. Itt először telepítenünk kell a dependenciákat az `npm install` parancs futtatásával. Ezek után futtassuk az `npm start` parancsot.
+
+Ha mindez lefutott, akkor az alkalmazás a [http://localhost:4200](http://localhost:4200) címen elérhetővé válik.
+
 
 ## Funkcionális követelmények
 
