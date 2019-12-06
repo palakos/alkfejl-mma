@@ -148,12 +148,12 @@ Jegyvásárlás folyamata
 
 ## Oldaltérkép
 
-Publikus:
+- Publikus:
 	- Főoldal
 	- Regisztráció
 	- Bejelentkezés
 	
-Felhasználó:
+- Felhasználó:
 	- Főoldal
 	- Bejelentkezés/Kijelentkezés
 	- Jegyeim
@@ -163,7 +163,7 @@ Felhasználó:
 	- Hősök
 		- Hősök képernyő
 		
-Admin:
+- Admin:
 	- Főoldal
 	- Bejelentkezés/Kijelentkezés
 	- Jegyeim
