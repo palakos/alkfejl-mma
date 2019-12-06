@@ -114,8 +114,12 @@ Ha mindez lefutott, akkor az alkalmazás a [http://localhost:4200](http://localh
 - **(Regisztrált) Felhasználó (ROLE_USER):** Az a személy, aki az API szolgáltatás használója. Regisztrált felhasználói fiókját használva böngészheti a filmeket, jegyet vásárolhat, valamint kezelheti az általa vásárolt jegyeket.
 - **Adminisztrátor (ROLE_ADMIN):** Az a személy, aki az API szolgáltatás vezető felügyelője. Hozzáférése van az API által kezelt adatokhoz.
 
-## Adatbázis és táblák
+## Használati esetek
 
+Felhasznált Forrás: [draw.io](https://www.draw.io)
+![Forrás: draw.io](./img/MMA_use_case.png "Forrás: draw.io")
+
+## Adatbázis és táblák
 
 Felhasznált Forrás: [dbdiagram.io](https://dbdiagram.io) 
 ![Forrás: dbdiagram.io](./img/mma-db.png "Forrás: dbdiagram.io")
