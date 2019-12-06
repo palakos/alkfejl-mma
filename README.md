@@ -180,6 +180,48 @@ Jegyvásárlás folyamata
 		- Új vetítés létrehozása
 		- Vetítés szerkesztése
 		
+## Végpontok
+
+#### Vendég(ROLE_QUEST)
+
+Metódus | Kérés | Leírás
+--------- | ----- | ------
+POST | /users/register | Regisztrál az oldalra a megadott felhasználói adatokkal.
+
+#### Felhasználó(ROLE_USER)/Admin(ROLE_ADMIN)
+
+Metódus | Kérés | Leírás
+--------- | ----- | ------
+POST | /users/login | Bejelentkeztet a meagadott adatokkal.
+GET | /users/id/tickets | Az adott felhasználó jegyei.
+GET | /heroes | Kilistázza a hősöket.
+GET | /heroes/id | Az adott azonosítójú hőst listázza ki.
+GET | /movies | Kilistázza a filmeket.
+GET | /movies/id | Addot azonosítójú filmet listázza ki.
+GET | /movies/id/projections | Az adott azonosítóval rendelkező, filmhez tartozó vetítéseket listázza ki.
+GET | /movies/id/heroes | A megadott filmben szerepló hősöket listázza ki.
+GET | /projections | A vetítéseket listázza ki.
+GET | /projections/id | Adott azonosítójú vetítést listázza ki.
+GET | /projections/id/tickets | A vetítéshez tartozó jegyek(jegyvásárlás).
+GET | /rooms | Termek kilistázása.
+GET | /rooms/id | Adott terem kilistázása.
+GET | /tickets | Jegyek listázása.
+
+#### Admin(ROLE_ADMIN)
+
+Metódus | Kérés | Leírás
+--------- | ----- | ------
+GET | /heroes/id/movies | Azokat a filmeket listázza amelyekben szerepel az adott hős.
+POST | /heroes	 | Új hős felvétele
+PUT | /heroes/id | Adott hős adatainak módosítása.
+DELETE | /heroes/id | Hős törlése.
+POST | /movies | Film felvétele.
+PUT | /movies/id | Adott film módosítása.
+DELETE | /movies/id | Film törlése.
+POST | /projections | Vetítés felvétele.
+PUT | /projections/id | Adott vetítés módosítása.
+DELETE | /projections/id | Vetítés törlése.
+		
 ## Adatbázis és táblák
 
 Felhasznált Forrás: [dbdiagram.io](https://dbdiagram.io) 
