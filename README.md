@@ -221,54 +221,116 @@ DELETE | /movies/id | Film törlése.
 POST | /projections | Vetítés felvétele.
 PUT | /projections/id | Adott vetítés módosítása.
 DELETE | /projections/id | Vetítés törlése.
-		
-## Oldalak
 
-A regisztrációs felület.
+## Drótváztervek
 
-![Regisztráció](./img/registration.PNG)
+Regisztrációs felület.
+
+![Regisztráció](./registration.png)
 
 A bejelentkezési felület.
 
-![Bejelentkezés](./img/login.PNG)
+![Bejelentkezés](./login.png)
 
 Filmeket tartalmazó oldal felülete.
 
-![Filmek](./img/movies.PNG)
+![Filmek](./movies.png)
 
 Hősöket tartalmazó oldal felülete.
 
-![Hősök](./img/heroes.PNG)
+![Hősök](./heroes.png)
 
 Egy kiválasztott film adatait tartalmazó oldal felülete.
 
-![Film](./img/movie.PNG)
+![Film](./movie.png)
 
 Egy kiválasztott hős adatait tartalmazó oldal felülete.
 
-![Hős](./img/hero.PNG)
+![Hős](./hero.png)
 
 Vetítéseket tartalmazó oldal felülete.
 
-![Vetítések](./img/projections.PNG)
+![Vetítések](./projections.png)
 
-Vetítés hozzáadása/szerkesztése oldal felülete.
+Vetítés szerkesztése oldal felülete.
 
-![Vetítések szerkesztése/hozzáadása](./img/projections_edit_add.PNG)
+![Vetítések szerkesztése](./projection_edit.png)
 
-Hős hozzáadása/szerkesztése oldal felülete.
+Vetítés hozzáadása oldal felülete.
 
-![Hős szerkesztése/hozzáadása](./img/hero_add_edit.PNG)
+![Vetítések hozzáadása](./projection_add.png)
 
-Film hozzáadása/szerkesztése oldal felülete.
+Hős hozzáadása oldal felülete.
 
-![Film szerkesztése/hozzáadása](./img/movie_add_edit.PNG)
+![Hős hozzáadása](./hero_add.png)
+
+Hős szerkesztése oldal felülete.
+
+![Hős szerkesztése](./hero_edit.png)
+
+Film hozzáadása oldal felülete.
+
+![Film hozzáadása](./movie_add.png)
+
+Film szerkesztése oldal felülete.
+
+![Film szerkesztése](./movie_edit.png)
 
 Felhasználó jegyeit megjelenítő oldal felülete.
 
+![Jegyek](./tickets.png)
+
+Jegyvásárlás oldal felülete.
+
+![Jegyvásárlás](./img/buyticket.PNG)
+
+## Oldalak
+
+A regisztrációs oldal.
+
+![Regisztráció](./img/registration.PNG)
+
+A bejelentkezési oldal.
+
+![Bejelentkezés](./img/login.PNG)
+
+Filmeket tartalmazó oldal.
+
+![Filmek](./img/movies.PNG)
+
+Hősöket tartalmazó oldal.
+
+![Hősök](./img/heroes.PNG)
+
+Egy kiválasztott film adatait tartalmazó oldal.
+
+![Film](./img/movie.PNG)
+
+Egy kiválasztott hős adatait tartalmazó oldal.
+
+![Hős](./img/hero.PNG)
+
+Vetítéseket tartalmazó oldal.
+
+![Vetítések](./img/projections.PNG)
+
+Vetítés hozzáadása/szerkesztése oldal.
+
+![Vetítések szerkesztése/hozzáadása](./img/projections_edit_add.PNG)
+
+Hős hozzáadása/szerkesztése oldal.
+
+![Hős szerkesztése/hozzáadása](./img/hero_add_edit.PNG)
+
+Film hozzáadása/szerkesztése oldal.
+
+![Film szerkesztése/hozzáadása](./img/movie_add_edit.PNG)
+
+Felhasználó jegyeit megjelenítő oldal.
+
 ![Jegyek](./img/tickets.PNG)
 
-Jegyvásárlás felülete.
+Jegyvásárlás oldal.
 
 ![Jegyvásárlás](./img/buyticket.PNG)
 
