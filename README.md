@@ -119,6 +119,33 @@ Ha mindez lefutott, akkor az alkalmazás a [http://localhost:4200](http://localh
 Felhasznált Forrás: [draw.io](https://www.draw.io)
 ![Forrás: draw.io](./img/MMA_use_case.png "Forrás: draw.io")
 
+## Folyamatok meghatározása
+
+- Felhasználó
+	- Jegyvásárlás folyamata
+	- Jegy törlésének folyamata
+	- Filmhez tartozó adatok megtekintésének folyamata
+	- Hőshöz tartozó adatok megtekintésének folyamata
+	- Vetítések megtekintésének folyamata
+	- Megvásárolt jegyek megtekintésének folyamata
+	
+- Admin:
+	- Film törlésének folyamata
+	- Filmhez tartozó adatok módosításának folyamata
+	- Film létrehozásának folyamata
+	- Hős törlésének folyamata
+	- Hőshöz tartozó adatok módosításának folyamata
+	- Hős létrehozásának folyamata
+	- Vetítés törlésének folyamata
+	- Vetítés létrehozásának folyamata
+	- Vetítés módosításának folyamata
+
+Felhasznált Forrás: [draw.io](https://www.draw.io)
+
+Jegyvásárlás folyamata
+![Forrás: draw.io](./img/mma_activity_diagram.png "Forrás: draw.io")
+
+
 ## Adatbázis és táblák
 
 Felhasznált Forrás: [dbdiagram.io](https://dbdiagram.io) 
