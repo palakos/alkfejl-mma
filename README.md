@@ -143,9 +143,43 @@ Felhasznált Forrás: [draw.io](https://www.draw.io)
 Felhasznált Forrás: [draw.io](https://www.draw.io)
 
 Jegyvásárlás folyamata
+
 ![Forrás: draw.io](./img/mma_activity_diagram.png "Forrás: draw.io")
 
+## Oldaltérkép
 
+Publikus:
+	- Főoldal
+	- Regisztráció
+	- Bejelentkezés
+	
+Felhasználó:
+	- Főoldal
+	- Bejelentkezés/Kijelentkezés
+	- Jegyeim
+	- Filmek
+		- Film adatai
+		- Jegyvásárlás
+	- Hősök
+		- Hősök képernyő
+		
+Admin:
+	- Főoldal
+	- Bejelentkezés/Kijelentkezés
+	- Jegyeim
+	- Filmek
+		- Új film létrehozása
+		- Film adatai
+			- Film szerkesztése
+		- Jegyvásárlás
+	- Hősök
+		- Új hős létrehozása
+		- Hősök képernyő
+			- Hős szerkesztése
+	- Vetítések listája
+		- Új vetítés létrehozása
+		- Vetítés szerkesztése
+		
 ## Adatbázis és táblák
 
 Felhasznált Forrás: [dbdiagram.io](https://dbdiagram.io) 
