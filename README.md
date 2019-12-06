@@ -282,7 +282,7 @@ Felhasználó jegyeit megjelenítő oldal felülete.
 
 Jegyvásárlás oldal felülete.
 
-![Jegyvásárlás](./img/buyticket.PNG)
+![Jegyvásárlás](./img/buyticket.png)
 
 ## Oldalak
 
