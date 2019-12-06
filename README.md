@@ -222,6 +222,57 @@ POST | /projections | Vetítés felvétele.
 PUT | /projections/id | Adott vetítés módosítása.
 DELETE | /projections/id | Vetítés törlése.
 		
+## Oldalak
+
+A regisztrációs felület.
+
+![Regisztráció](./img/registration.PNG)
+
+A bejelentkezési felület.
+
+![Bejelentkezés](./img/login.PNG)
+
+Filmeket tartalmazó oldal felülete.
+
+![Filmek](./img/movies.PNG)
+
+Hősöket tartalmazó oldal felülete.
+
+![Hősök](./img/heroes.PNG)
+
+Egy kiválasztott film adatait tartalmazó oldal felülete.
+
+![Film](./img/movie.PNG)
+
+Egy kiválasztott hős adatait tartalmazó oldal felülete.
+
+![Hős](./img/hero.PNG)
+
+Vetítéseket tartalmazó oldal felülete.
+
+![Vetítések](./img/projections.PNG)
+
+Vetítés hozzáadása/szerkesztése oldal felülete.
+
+![Vetítések szerkesztése/hozzáadása](./img/projections_edit_add.PNG)
+
+Hős hozzáadása/szerkesztése oldal felülete.
+
+![Hős szerkesztése/hozzáadása](./img/hero_add_edit.PNG)
+
+Film hozzáadása/szerkesztése oldal felülete.
+
+![Film szerkesztése/hozzáadása](./img/movie_add_edit.PNG)
+
+Felhasználó jegyeit megjelenítő oldal felülete.
+
+![Jegyek](./img/tickets.PNG)
+
+Jegyvásárlás felülete.
+
+![Jegyvásárlás](./img/buyticket.PNG)
+
+
 ## Adatbázis és táblák
 
 Felhasznált Forrás: [dbdiagram.io](https://dbdiagram.io) 
