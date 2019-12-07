@@ -25,16 +25,4 @@ export class MoviesComponent implements OnInit {
     return this.authService.user.role.toString() == Role[2];
   }
 
-  onDeleteClick(id: number) {
-
-    if (confirm("Biztos, hogy törölni akarod a filmet?")) {
-      this.movieService.deleteMovie(id)
-        .then(async () => {
-          this.movies = await this.movieService.getMovies();
-        })
-    }
-
-
-  }
-
 }

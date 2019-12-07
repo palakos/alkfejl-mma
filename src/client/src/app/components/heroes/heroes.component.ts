@@ -24,15 +24,4 @@ export class HeroesComponent implements OnInit {
     return this.authService.user.role.toString() == Role[2];
   }
 
-  onDeleteClick(id: number) {
-
-    if (confirm("Biztos, hogy törölni akarod a hőst?")) {
-      this.heroService.deleteHero(id)
-        .then(async () => {
-          this.heroes = await this.heroService.getHeroes();
-        })
-    }
-
-  }
-
 }

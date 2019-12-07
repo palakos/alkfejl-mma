@@ -50,7 +50,7 @@ public class TicketController {
   }
 
   @GetMapping("/{id}")
-  @Secured({ "ROLE_ADMIN" })
+  @Secured({ "ROLE_ADMIN", "ROLE_USER" })
   public ResponseEntity<Ticket> get(@PathVariable Integer id) {
     Optional<Ticket> ticket = ticketRepository.findById(id);
     if (!ticket.isPresent())
@@ -82,7 +82,7 @@ public class TicketController {
   }
   
   @DeleteMapping("/{id}")
-  @Secured({ "ROLE_ADMIN" })
+  @Secured({ "ROLE_ADMIN", "ROLE_USER" })
   public ResponseEntity delete(@PathVariable Integer id) {
     Optional<Ticket> ticket = ticketRepository.findById(id);
     if (!ticket.isPresent())

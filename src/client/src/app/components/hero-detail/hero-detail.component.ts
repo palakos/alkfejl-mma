@@ -31,10 +31,14 @@ export class HeroDetailComponent implements OnInit {
   }
 
   onDeleteClick(id: number) {
-    this.heroService.deleteHero(id)
-      .then(async () => {
-        await this.router.navigate(['/heroes']);
-      })
+
+    if (confirm("Biztos, hogy törölni akarod a hőst?")) {
+
+      this.heroService.deleteHero(id)
+        .then(async () => {
+          await this.router.navigate(['/heroes']);
+        })
+    }
   }
 
 }

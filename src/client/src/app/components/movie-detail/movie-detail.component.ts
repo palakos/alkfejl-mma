@@ -38,10 +38,14 @@ export class MovieDetailComponent implements OnInit {
   }
 
   onDeleteClick(id: number) {
-    this.movieService.deleteMovie(id)
-      .then(async () => {
-        await this.router.navigate(['/movies']);
-      })
+
+    if (confirm("Biztos, hogy törölni akarod a filmet?")) {
+
+      this.movieService.deleteMovie(id)
+        .then(async () => {
+          await this.router.navigate(['/movies']);
+        })
+    }
   }
 
 }

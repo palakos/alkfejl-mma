@@ -27,26 +27,22 @@ export class TicketsComponent implements OnInit {
   }
 
   async onDeleteClick(id: number) {
+    const deletedTicket: Ticket = await this.ticketService.getTicket(id);
 
     if (confirm("Biztos, hogy törölni akarod a jegyet?")) {
 
-      const deletedTicket: Ticket = await this.ticketService.getTicket(id);
-
+      this.ticketService.deleteTicket(id)
+        .then(async () => {
+          this.tickets = await this.ticketService.getTickets();
+          this.tickets = this.tickets.filter(ticket => ticket.user && ticket.user.id == this.authService.user.id);
+        })
+     
       if (deletedTicket.projection && deletedTicket.projection.isfull == true) {
         const projection: Projection = deletedTicket.projection;
         projection.isfull = false;
         await this.projectionService.updateProjection(projection);
       }
 
-
-      this.ticketService.deleteTicket(id)
-        .then(async () => {
-          this.tickets = await this.ticketService.getTickets();
-          this.tickets = this.tickets.filter(ticket => ticket.user && ticket.user.id == this.authService.user.id);
-
-
-
-        })
     }
 
 
