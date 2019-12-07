@@ -15,6 +15,7 @@
 - [Futtatás](#futtatás)
   - [Backend](#run-backend)
   - [Frontend](#run-frontend)
+- [Applikáció használata](#applikáció-használata)
 - [Funkcionális követelmények](#funkcionális-követelmények)
 - [Nem funkcionális követelmények](#nem-funkcionális-követelmények)
 - [Fogalomjegyzék](#fogalomjegyzék)
@@ -78,6 +79,11 @@ Karakterkódolás beállítása
 A frontend futtatásához lépjünk be terminállal az `src/client` mappába. Itt először telepítenünk kell a dependenciákat az `npm install` parancs futtatásával. Ezek után futtassuk az `npm start` parancsot.
 
 Ha mindez lefutott, akkor az alkalmazás a [http://localhost:4200](http://localhost:4200) címen elérhetővé válik.
+
+## Applikáció használata
+
+[Futtatás](#futtatás) részben leírtak végrehajtása után a http://localhost:4200 linken keresztül elérhetjük az applikációt. Kezdetben a főoldal fogad minket, mely tartalmaz regisztrációs lehetőséget és bejelentkezési lehetőséget. Bejelentkezhetünk az [Autentikációs](#autentikáció) részben említett két fiók valamelyikével, illetve regisztrálhatunk is egy saját fiókot. Miután bejelentkeztünk felhasználóként elérhetővé válnak a **Jegyeim, Filmek, Hősök menüpontok**. **Jegyeim** menüpont alatt megtekinthetjük a megvásárolt jegyeinket és törölhetjük azokat. **Filmek** menüpont alatt megtalálhatóak a filmek, melyekre rákattintva elolvashatóak a hozzá tartozó adatok, és megtekinthetőek a vetítési időpontok. Itt van lehetőségünk jegyet vásárolni egy vetítési időpontra. Jegyvásárlás menete: **Jegyvásárlás** gombra kattintás után kiválaszthatjuk az ülőhelyet (sor-oszlop páros bepipálásával), majd a **jegyek megvétele** gombbal véglegesítjehtjük a jegyvásárlást. Vásárlás után a jegy megjelenik a **Jegyeim** menüpont alatt. **Hősök** menpontra kattintva megjelennek a marvel univerzum hősei, melyekre rákattintva elolvashatjuk milyen fajhoz tartoznak, mi a nevük és melyik szinész formálja meg őket. Admin felhasználó esetén az eddig említett funkciókon túl lehetőségünk nyílik új film felvételére, új hős felvételére, és új vetítés felvételére. Új film felvételét a **Filmek** menüpont **Új film hozzáadása** gombjának megnyomásával lehet kezdeményezni. A gomb megnyomása után miután az adatokat kitöltöttük (magyar cím, angol cím stb.) a **Film mentése** gombbal menthetjük a filmet. Hős felvétele a **Hősök** menüpont **Új hős hozzáadása** gombján keresztül lehetséges. Ekkor szintén megjelenik egy ablak ahol megadhatók a hős adatai, majd a **Hős mentése** gombbal véglegesíthető a hős felvitele. Vetítés létrehozása a **Vetítés** menüponton keresztül érhető el, mely tartalmmazza az összes film eddigi összes vetítését. Ebben a menüpontban az **Új vetítés hozzáadása** gombot megnyomva kezdeményezhetünk vetítés létrehozást. Megadjuk az adatokat és a **Vetítés mentése** gomb megnyomása után a felvett vetítés megjelenik a vetítések listáján, illetve a megadott film vetítési időpontjai között is.
+Admin-ként lehetőségünk van a filmek, hősök, vetítések törlésére és szerkesztésére is.
 
 
 ## Funkcionális követelmények
