@@ -144,7 +144,7 @@ Felhasznált Forrás: [draw.io](https://www.draw.io)
 
 Jegyvásárlás folyamata
 
-![Forrás: draw.io](./img/mma_activity_diagram.png "Forrás: draw.io")
+![Forrás: draw.io](./img/jegyvasarlas_activity_diagram.png "Forrás: draw.io")
 
 ## Oldaltérkép
 
